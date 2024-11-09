@@ -1,0 +1,95 @@
+/* Login.css */
+.login-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    width: 100%;
+  }
+  
+  .role-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+    border-radius: 8px;
+    margin-right: 5px;
+  }
+  
+  .toggle-button:last-child {
+    margin-right: 0;
+  }
+  
+  .toggle-button.active {
+    background-color: #667eea;
+    color: white;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-field {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    width: 100%;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .password-field {
+    display: flex;
+    align-items: center;
+  }
+  
+  .show-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: -35px;
+    color: #555;
+  }
+  
+  .login-button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #667eea;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .login-button:hover {
+    background-color: #5a67d8;
+  }
+  
+  .additional-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .additional-links a {
+    color: #667eea;
+    text-decoration: none;
+  }
+  
+  .additional-links a:hover {
+    text-decoration: underline;
+  }
+  
