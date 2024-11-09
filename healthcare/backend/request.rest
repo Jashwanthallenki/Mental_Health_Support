@@ -1,6 +1,6 @@
-POST http://localhost:3000/generate
+POST http://localhost:3000/analyzeEmotion
 Content-Type: application/json
 
 {
-    "prompt": "Write about the importance of mental healthcare."
+    "text": "hi hello im depressed"
 }
