@@ -1,12 +1,11 @@
 const express = require('express');
 const { HfInference } = require('@huggingface/inference');
-require('dotenv').config(); // For loading environment variables
+require('dotenv').config();
 
 const router = express.Router();
 const hf = new HfInference(process.env.HF_API_KEY);
 
-router.post('/generate', async (req, res) => {
-    console.log(hf);
+router.post('/', async (req, res) => {
     const { prompt } = req.body;
     try {
         const result = await hf.textGeneration({
@@ -21,11 +20,20 @@ router.post('/generate', async (req, res) => {
             options: { timeout: 180000 } 
         });
 
-        console.log(result.generated_text);
-        res.json({ blogPost: result.generated_text });
+        const generatedText = result.generated_text || '';
+        
+        const summaryResult = await hf.request({
+            model: 'facebook/bart-large-cnn',
+            inputs: generatedText,  
+        });
+
+        const summary = summaryResult[0]?.summary_text || 'No summary available';
+
+        res.json({ blogPost: generatedText, summary });
+
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Error generating text' });
+        res.status(500).json({ error: 'Error generating text or summarizing' });
     }
 });
 
