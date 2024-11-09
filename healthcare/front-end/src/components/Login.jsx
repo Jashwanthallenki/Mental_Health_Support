@@ -2,7 +2,7 @@
 // Login.js
 import React, { useState } from 'react';
 import './Login.css';
-
+import { Link } from 'react-router-dom';
 function Login() {
   const [isUser, setIsUser] = useState(true);
 
@@ -23,7 +23,7 @@ function Login() {
         </button>
       </div>
       <form className="login-form">
-        <input type="email" placeholder="Enter your email" className="input-field" />
+        <input type="email" placeholder="Enter your name" className="input-field" />
         <div className="password-field">
           <input type="password" placeholder="Enter your password" className="input-field" />
           <button type="button" className="show-password">👁️</button>
@@ -33,8 +33,8 @@ function Login() {
         </button>
         <div className="additional-links">
           <a href="#forgot-password">Forgot password?</a>
-          <a href="#create-account">Create account</a>
-        </div>
+          <Link to="/SignUp">Create account</Link>
+</div>
       </form>
     </div>
   );

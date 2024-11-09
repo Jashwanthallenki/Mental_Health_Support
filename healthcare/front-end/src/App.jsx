@@ -1,18 +1,26 @@
+/* eslint-disable no-unused-vars */
 // App.js
 import React from 'react';
-import Navbar from './Navbar';
-import Login from './Login';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignupPage';
+import Services from './pages/Services';
+import Contact from './pages/Contact.jsx';
 
 function App() {
   return (
-    <div className="app">
-      <Navbar />
-      <div className="content">
-        <Login />
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element = {<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App
+export default App;

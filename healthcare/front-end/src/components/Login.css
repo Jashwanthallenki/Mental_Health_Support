@@ -92,4 +92,66 @@
   .additional-links a:hover {
     text-decoration: underline;
   }
-  
+  /* Login.css */
+.login-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.role-toggle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.toggle-button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+  border-radius: 8px;
+  margin-right: 5px;
+}
+
+.toggle-button.active {
+  background-color: #667eea;
+  color: white;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  width: 100%;
+  background-color: #f0f0f0;
+}
+
+.login-button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #667eea;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.additional-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
