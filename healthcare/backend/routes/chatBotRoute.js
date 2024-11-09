@@ -6,7 +6,8 @@ const router = express.Router();
 const hf = new HfInference(process.env.HF_API_KEY);
 
 router.post('/', async (req, res) => {
-    const { prompt } = req.body;
+    const { message: prompt } = req.body;
+    console.log(prompt);
     try {
         const result = await hf.textGeneration({
             model: 'meta-llama/Llama-3.2-3B-Instruct',

@@ -2,10 +2,12 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const chatBotRoute = require('./routes/chatBotRoute');
+const cors = require('cors')
 // const authRoutes = require('./routes/authRoutes');
 // const moodRoutes = require('./routes/moodRoutes');
 
 const app = express();
+app.use(cors());
 connectDB();
 
 app.use(express.json());
