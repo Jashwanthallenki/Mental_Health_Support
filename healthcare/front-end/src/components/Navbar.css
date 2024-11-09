@@ -1,11 +1,19 @@
 /* Navbar.css */
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
 .navbar {
     width: 100%;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgb(56, 53, 53);
+    border-bottom-right-radius: 20px;
   }
   
   .navbar-brand {
@@ -17,16 +25,17 @@
   .nav-links {
     list-style-type: none;
     display: flex;
-    gap: 15px;
+    gap: 20px;
+
   }
   
   .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-size: larger;
   }
   
   .nav-links a:hover {
-    color: #ccc;
+    color: #1ae3d6;
   }
   

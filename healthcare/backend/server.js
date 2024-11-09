@@ -5,11 +5,11 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 
 const chatBotRoute = require('./routes/chatBotRoute');
-<<<<<<< HEAD
+
 const cors = require('cors')
-=======
+
 const sentimentRoute = require('./routes/sentimentRoute');
->>>>>>> 53202d1c6b4899d865711fdb566de9033ae4fcdf
+
 // const authRoutes = require('./routes/authRoutes');
 // const moodRoutes = require('./routes/moodRoutes');
 
