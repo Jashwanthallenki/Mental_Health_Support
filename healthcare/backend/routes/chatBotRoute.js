@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
 
         const summary = summaryResult[0]?.summary_text || 'No summary available';
 
-        res.json({ blogPost: generatedText, summary });
+        res.json({ summary });
 
     } catch (error) {
         console.error(error);
