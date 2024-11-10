@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Chore Manager - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --light-color: #f4f6f9;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: var(--secondary-color);
+            padding-top: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar .nav-link {
+            padding: 1rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            border-radius: 25px;
+            color: white;
+        }
+
+        /* Navbar Hover Effect */
+        .nav-link {
+            padding: 0.8rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            background-color: var(--primary-color);
+            border-radius: 30px;
+            padding: 0.8rem 2rem;
+        }
+
+        /* Modal Styling */
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .modal-body {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item i {
+            color: #3498db;
+        }
+
+        /* Chatbot Styling */
+        .chatbot {
+            margin-top: 2rem;
+        }
+
+        .chatbox {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #f4f6f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .chatbox p {
+            margin: 0.5rem 0;
+        }
+
+        .user-input input {
+            width: 75%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .user-input button {
+            padding: 0.5rem 1rem;
+            margin-left: 1rem;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .user-input button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="px-3 mb-4">
+            <h4 class="text-white">MindConnect</h4>
+        </div>
+        <nav class="nav flex-column">
+            <a href="#" class="nav-link active">
+                <i class="fas fa-home me-2"></i> Dashboard
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-tasks me-2"></i> Resources
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cog me-2"></i> Settings
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" style="margin-left: 250px; padding: 2rem;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Resources</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Therapists</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="notificationButton" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge bg-danger" id="notificationCount">3</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="stats-card card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Anonymous Community</h5>
+                        <p>Chat in this community to connect people while being Anonymous.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="stats-card card bg-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Friendly Community</h5>
+                        <p>Chat here to socialize with people.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chatbot Section -->
+        <div class="chatbot">
+            <h3>AI Therapist</h3>
+            <div class="chatbox" id="chatbox">
+                <p><strong>Mr.AI:</strong> Hello! How can I assist you today?</p>
+            </div>
+            <div class="user-input mb-4"> <!-- Added mb-4 for margin bottom -->
+                <input type="text" id="userInput" placeholder="Type your message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <!-- Find a Therapist! Button -->
+        <div class="col-md-6 mt-4"> <!-- Added mt-4 for margin top -->
+            <div class="stats-card card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Find a Therapist!</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Notification Modal -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="notification-item">
+                        <i class="fas fa-info-circle me-3"></i> New community member joined!
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-comment-dots me-3"></i> You have a new message in the chat.
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-tasks me-3"></i> New resources available in the dashboard.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="markAllAsRead()">Mark all as read</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+            const chatbox = document.getElementById('chatbox');
+
+            if (userInput.trim() !== "") {
+                const userMessage = document.createElement('p');
+                userMessage.innerHTML = `<strong>You:</strong> ${userInput}`;
+                chatbox.appendChild(userMessage);
+
+                const botReply = document.createElement('p');
+                botReply.innerHTML = `<strong>Chatbot:</strong> I'm here to listen and provide support.`;
+                chatbox.appendChild(botReply);
+
+                document.getElementById('userInput').value = "";  
+                chatbox.scrollTop = chatbox.scrollHeight;  // Scroll chatbox to bot
+            }
+        }
+
+        function markAllAsRead() {
+            // Change notification count and update the UI
+            document.getElementById('notificationCount').innerText = "0";
+            // Optionally, remove notifications in the modal or mark them as read
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignupPage';
 import Services from './pages/Services';
 import Contact from './pages/Contact.jsx';
-
+import Index from './pages/Index.jsx';
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/index" element={<Index />} />
       </Routes>
     </Router>
   );
