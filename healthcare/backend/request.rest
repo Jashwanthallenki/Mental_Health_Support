@@ -1,6 +1,9 @@
-POST http://localhost:3000/analyzeEmotion
+POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "text": "hi hello im depressed"
+    "email": "abc@gmail.com",
+    "username": "abcde",
+    "password": "abcde",
+    "therapist_id": "672ff0f8a1d2aebdf8891a38"
 }
