@@ -15,6 +15,10 @@ const TherapistSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Patient'
   }],
+  rating:{
+    type:Number,
+    default:3
+  }
 });
 
 // Hash password before saving
