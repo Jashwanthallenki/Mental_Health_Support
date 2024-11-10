@@ -1,10 +1,8 @@
-import Navbar from "../components/Navbar";
-import ChatBot from "../components/Chatbot";
+import TherapistList from "../components/TherapistList";
 function Services(){
     return(
         <>
-            <Navbar/>
-            <ChatBot/>        
+            <TherapistList/>       
         </>
     )
 

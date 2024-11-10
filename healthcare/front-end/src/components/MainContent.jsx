@@ -1,77 +1,56 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { useState } from 'react';
 
 function MainContent() {
+    const [messages, setMessages] = useState([
+        { sender: 'bot', text: "Hello! How can I assist you today?" }
+    ]);
 
-    function sendMessage() {
+    async function sendMessage() {
         const userInput = document.getElementById('userInput').value;
-        const chatbox = document.getElementById('chatbox');
+        
+        if (userInput.trim() === "") return;
 
-        if (userInput.trim() !== "") {
-            const userMessage = document.createElement('p');
-            userMessage.innerHTML = `<strong>You:</strong> ${userInput}`;
-            chatbox.appendChild(userMessage);
+        // Add the user's message to the chat
+        setMessages((prevMessages) => [
+            ...prevMessages,
+            { sender: 'user', text: userInput }
+        ]);
 
-            const botReply = document.createElement('p');
-            botReply.innerHTML = `<strong>Chatbot:</strong> I'm here to listen and provide support.`;
-            chatbox.appendChild(botReply);
+        // Send the message to the server
+        try {
+            const response = await fetch('http://localhost:3000/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userInput })
+            });
 
-            document.getElementById('userInput').value = "";  
-            chatbox.scrollTop = chatbox.scrollHeight;  // Scroll chatbox to bot
+            const data = await response.json();
+
+            // Add the bot's response to the chat
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { sender: 'bot', text: data.summary || "I'm here to listen and provide support." }
+            ]);
+
+        } catch (error) {
+            console.error("Error fetching bot response:", error);
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { sender: 'bot', text: "Sorry, something went wrong. Please try again." }
+            ]);
         }
+
+        // Clear the input field
+        document.getElementById('userInput').value = "";
     }
 
-
-
     return (
-        <div className="main-content" style={{ marginLeft: '250px', padding: '2rem' }}>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#"></a>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav ms-auto">
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Home</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Services</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Resources</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Therapists</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Profile</a>
-                            </li>
-                            <li className="nav-item">
-                                <a
-                                    className="nav-link"
-                                    href="#"
-                                    id="notificationButton"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#notificationModal"
-                                >
-                                    <i className="fas fa-bell"></i>
-                                    <span className="badge bg-danger" id="notificationCount">3</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+        <div className="main-content" style={{ marginLeft: '0.5em', padding: '2rem' }}>
+           
             <div className="row g-4 mb-4">
                 <div className="col-md-6">
                     <div className="stats-card card bg-primary text-white">
@@ -95,11 +74,15 @@ function MainContent() {
             <div className="chatbot">
                 <h3>AI Therapist</h3>
                 <div className="chatbox" id="chatbox">
-                    <p><strong>Mr. AI:</strong> Hello! How can I assist you today?</p>
+                    {messages.map((msg, index) => (
+                        <p key={index} style={{ margin: '0.5rem 0' }}>
+                            <strong>{msg.sender === 'user' ? 'You:' : 'Chatbot:'}</strong> {msg.text}
+                        </p>
+                    ))}
                 </div>
                 <div className="user-input mb-4"> {/* Added mb-4 for margin bottom */}
                     <input type="text" id="userInput" placeholder="Type your message..." />
-                    <button onClick={() => sendMessage()}>Send</button>
+                    <button onClick={sendMessage}>Send</button>
                 </div>
             </div>
 
