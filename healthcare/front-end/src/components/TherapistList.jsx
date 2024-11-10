@@ -8,6 +8,7 @@ const TherapistList = () => {
   const [therapists, setTherapists] = useState([]);
   const [error, setError] = useState(null);
 
+  // Fetch the list of therapists from the backend
   useEffect(() => {
     const fetchTherapists = async () => {
       try {
