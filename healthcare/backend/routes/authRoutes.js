@@ -9,20 +9,19 @@ const Patient = require("../models/Patient");
 const JWT_SECRET = 'jwt_secret_key';
 
 router.post('/register', async (req, res) => {
-    const { email, username, password, therapist_id } = req.body;
+    const { email, username, password} = req.body;
     try {
         const patient = new Patient({
             username,
-            password,
-            therapist_id
+            password
         });
         await patient.save();
 
-        const therapist = await Therapist.findOne({ _id: therapist_id });
-        if (therapist) {
-            therapist.patients.push(patient._id);
-            await therapist.save();
-        }
+        // const therapist = await Therapist.findOne({ _id: therapist_id });
+        // if (therapist) {
+        //     therapist.patients.push(patient._id);
+        //     await therapist.save();
+        // }
 
         const token = jwt.sign(
             { id: patient._id, username: patient.username },

@@ -1,6 +1,16 @@
+<<<<<<< HEAD
 POST http://localhost:3000/analyzeEmotion
 Content-Type: application/json
 
 {
 "text":"I am sleepy"
+=======
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "email":"fakmail@123.com",
+    "username":"prac123",
+    "password":"abcd1234"
+>>>>>>> ece225ddc03115a7f65ae88e216743b0c113485e
 }

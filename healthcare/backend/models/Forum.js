@@ -20,3 +20,5 @@ const ForumSchema = new mongoose.Schema({
         type:Number
     }
 })
+
+module.exports = mongoose.model('Forum', ForumSchema);
