@@ -13,8 +13,7 @@ const PatientSchema = new mongoose.Schema({
   },
   therapist_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Therapist',
-    required: true
+    ref: 'Therapist'
   },
   message: [{
     type: String

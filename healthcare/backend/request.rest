@@ -1,6 +1,8 @@
-POST http://localhost:3000/reso/t
+POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-
+    "email":"fakmail@123.com",
+    "username":"prac123",
+    "password":"abcd1234"
 }

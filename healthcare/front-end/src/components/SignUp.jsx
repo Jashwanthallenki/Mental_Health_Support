@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 // SignUp.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
 function SignUp() {
@@ -11,18 +12,21 @@ function SignUp() {
   });
 
   const [usersList, setUsersList] = useState([]); // List to store user data
+  const navigate = useNavigate(); // Move useNavigate outside of handleSubmit
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserDetails({ ...userDetails, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+const handleSubmit =(e) => {
     e.preventDefault();
+   
     setUsersList([...usersList, userDetails]); // Append new user data to the list
     console.log('Users List:', usersList); // Log for debugging
     setUserDetails({ email: '', username: '', password: '' }); // Reset form fields
     alert('Account created successfully!');
+    navigate('/services'); // Use navigate here
   };
 
   return (
