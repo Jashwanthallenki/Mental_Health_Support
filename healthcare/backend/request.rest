@@ -1,6 +1,6 @@
-POST http://localhost:3000/reso/t
+POST http://localhost:3000/analyzeEmotion
 Content-Type: application/json
 
 {
-
+"text":"I am sleepy"
 }
