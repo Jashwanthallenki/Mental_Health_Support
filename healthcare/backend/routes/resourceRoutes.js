@@ -3,7 +3,7 @@ const express = require('express');
 const Therapist = require("../models/Therapist");
 const router = express.Router();
 
-router.post('/t',async(req,res)=>{
+router.get('/t',async(req,res)=>{
     try {
         const therapists = await Therapist.find();
         res.status(200).json(therapists);

@@ -1,15 +1,12 @@
 // TherapistList.js
-import  { useState, useEffect } from 'react';
-import TherapistCard from './TherapistCard';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
 
-function TherapistList() {
-    const [therapists, setTherapists] = useState([]);
-    // eslint-disable-next-line no-unused-vars
-    const [selectedTherapist, setSelectedTherapist] = useState(null);
+const TherapistList = () => {
+  const [therapists, setTherapists] = useState([]);
+  const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:3000/reso/t')
+        fetch('/api/therapists')
             .then(response => response.json())
             .then(data => setTherapists(data))
             .catch(error => console.error('Error fetching therapists:', error));
@@ -20,19 +17,17 @@ function TherapistList() {
         console.log(`Selected therapist ID: ${therapistId}`);
     };
 
-    return (
-        <div className="container">
-            <div className="row">
-                {therapists.map(therapist => (
-                    <TherapistCard
-                        key={therapist._id}
-                        therapist={therapist.username}
-                        onSelect={handleSelectTherapist}
-                    />
-                ))}
-            </div>
-        </div>
-    );
-}
+  return (
+    <div>
+      <h2>Therapist List</h2>
+      {error && <p>{error}</p>}
+      <ul>
+        {therapists.map((therapist) => (
+          <li key={therapist._id}>{therapist.username}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default TherapistList;
