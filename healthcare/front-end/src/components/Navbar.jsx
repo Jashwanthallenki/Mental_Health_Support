@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
+import {Link} from 'react-router-dom';
 
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-primary">
             <div className="container-fluid">
-                <a className="navbar-brand text-white" href="#">MindConnect</a>
+                <Link className="navbar-brand text-white" to="#">MindConnect</Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -21,20 +21,20 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link text-white" href="#">Home</a>
+                            <Link className="nav-link text-white" to="/">Home</Link>
+                        </li>
+                        {/* <li className="nav-item">
+                            <Link className="nav-link text-white" to="#">Services</Link>
+                        </li> */}
+                        <li className="nav-item">
+                            <Link className="nav-link text-white" to="#">Community</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-white" href="#">Services</a>
+                            <Link className="nav-link text-white" to="/services">Therapist List</Link>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link text-white" href="#">Community</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link text-white" href="#">AI Therapist</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link text-white" href="#">Contact Us</a>
-                        </li>
+                        {/* <li className="nav-item">
+                            <a className="nav-link text-white" to="#">Contact Us</a>
+                        </li> */}
                     </ul>
                 </div>
             </div>
