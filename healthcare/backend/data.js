@@ -1,32 +1,49 @@
 const Therapist = require("./models/Therapist");
 const Patient = require("./models/Patient");
-
 const mongoose = require('mongoose');
 const connectDB = require('./config/db');
 
+// Connect to MongoDB
 connectDB();
 
 async function seedDatabase() {
   try {
-    // Find all therapists that don't have the "rating" field
-    const therapistsWithoutRating = await Therapist.find({ rating: { $exists: false } });
+    // Clear existing data in Therapist and Patient collections
+    const therapist = new Therapist({
+      username: 'therapist1',
+      password: 'therapistPassword', // This will be hashed automatically
+    });
 
-    // Update each therapist by adding the default rating of 3
-    if (therapistsWithoutRating.length > 0) {
-      const updatePromises = therapistsWithoutRating.map(async (therapist) => {
-        therapist.rating = 3; // Set default rating
-        await therapist.save(); // Save the updated document
-      });
+    await therapist.save();
 
-      // Wait for all updates to finish
-      await Promise.all(updatePromises);
-      console.log(`${therapistsWithoutRating.length} therapists updated with default rating.`);
-    } else {
-      console.log('No therapists need updating.');
-    }
-    
-  } catch (err) {
-    console.error('Error updating therapists:', err);
+    // Create example patients associated with this therapist
+    const patient1 = new Patient({
+      username: 'patient1',
+      password: 'patient1Password', // This will be hashed automatically
+      therapist_id: therapist._id,
+      message: ['Hello', 'I need help with anxiety'],
+    });
+
+    const patient2 = new Patient({
+      username: 'patient2',
+      password: 'patient2Password', // This will be hashed automatically
+      therapist_id: therapist._id,
+      message: ['Hello', 'I need help with stress management'],
+    });
+
+    await patient1.save();
+    await patient2.save();
+
+    // Update therapist's patients array
+    therapist.patients.push(patient1._id, patient2._id);
+    await therapist.save();
+
+    console.log('Database seeded successfully!');
+  } catch (error) {
+    console.error('Error seeding database:', error);
+  } finally {
+    // Close the MongoDB connection
+    mongoose.connection.close();
   }
 }
 
