@@ -9,7 +9,7 @@ function MainContent() {
 
     async function sendMessage() {
         const userInput = document.getElementById('userInput').value;
-        
+        document.getElementById('userInput').value = " ";
         if (userInput.trim() === "") return;
 
         // Add the user's message to the chat
@@ -44,8 +44,8 @@ function MainContent() {
             ]);
         }
 
-        // Clear the input field
-        document.getElementById('userInput').value = "";
+
+        
     }
 
     return (

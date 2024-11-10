@@ -9,7 +9,7 @@ function TherapistList() {
     const [selectedTherapist, setSelectedTherapist] = useState(null);
 
     useEffect(() => {
-        fetch('/api/therapists')
+        fetch('http://localhost:3000/reso/t')
             .then(response => response.json())
             .then(data => setTherapists(data))
             .catch(error => console.error('Error fetching therapists:', error));
